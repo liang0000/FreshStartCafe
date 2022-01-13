@@ -1,25 +1,29 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Image } from "react-native";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import TableScreen from './pages/user/tableScreen';
+import StaffLogin from './pages/staff/staffLoginScreen';
+import StaffMenuScreen from './pages/staff/staffMenuScreen';
+import TabNavigation from './navigation/tabNav';
 
-export default function App() {
+
+const Stack = createStackNavigator();
+
+const App = () => {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-      <Text>Testing only</Text> 
-      {/* Twinke commented */}
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="tableScreen">
+        <Stack.Screen name="tableScreen" component={TableScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="tabNav" component={TabNavigation}/>
+        <Stack.Screen name="staffLoginScreen" component={StaffLogin}  options={{headerShown:false}}/>
+        <Stack.Screen name="staffMenuScreen" component={StaffMenuScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-//this is liangs testing
+export default App;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
