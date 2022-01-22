@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
 
   bgColour: {
     flex: 1,
-    // alignItems: "center",
     backgroundColor: "#D3D3CB",
   },
 
@@ -28,6 +27,7 @@ const styles = StyleSheet.create({
     width: "80%",
     borderColor: "gray",
     borderWidth: 1,
+    marginBottom: 12,
   },
 
   p: {

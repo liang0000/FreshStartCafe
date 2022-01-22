@@ -22,9 +22,9 @@ const StaffMenuScreen = ({ navigation }) => {
       <ScrollView horizontal>
         <HeaderButtonNavigation title="Salad" />
       </ScrollView>
-      <ScrollView style={{}}>
+      <ScrollView>
         <View style={{ backgroundColor: "#ddd", padding: 12, marginTop: 12 }}>
-          <Text>Salad</Text>
+          <Text>Asian</Text>
         </View>
 
         {menu.length !== 0

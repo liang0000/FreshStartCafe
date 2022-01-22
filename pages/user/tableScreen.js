@@ -37,6 +37,7 @@ const tableScreen = ({ navigation }) => {
           }
         />
       </ScrollView>
+
       {/* direct to staff login page */}
       <TouchableOpacity
         style={{ marginBottom: 12 }}

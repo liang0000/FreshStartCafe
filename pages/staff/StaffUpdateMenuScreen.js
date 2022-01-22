@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,15 +12,20 @@ import styles from "../../assets/design/styles";
 import * as ImagePicker from "expo-image-picker";
 import { useFirebase } from "../../firebase/FirebaseContext";
 
-const StaffAddMenuScreen = () => {
+const StaffUpdateMenuScreen = ({ route }) => {
   const [image, setImage] = useState(null);
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("");
-  // Firebase function
-  const { uploadMenu } = useFirebase();
 
+  // passing ID
+  const { product } = route.params;
+
+  // Firebase function
+  const { updateProduct } = useFirebase();
+
+  // allowed user to select image from local mobile storage
   const pickImage = async () => {
     await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -36,6 +41,23 @@ const StaffAddMenuScreen = () => {
       });
   };
 
+  // render when pageload
+  useEffect(() => {
+    if (product.productImage) setImage(product.productImage);
+    if (product.productName !== "") {
+      setProductName(product.productName);
+    }
+    if (product.productCategory !== "") {
+      setProductCategory(product.productCategory);
+    }
+    if (product.productPrice !== "") {
+      setProductPrice(product.productPrice);
+    }
+    if (product.productDescription !== "") {
+      setProductDescription(product.productDescription);
+    }
+  }, [product]);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
@@ -46,6 +68,7 @@ const StaffAddMenuScreen = () => {
               style={{
                 width: "100%",
                 height: 200,
+                backgroundColor: "lightgrey",
               }}
               resizeMode="cover"
             />
@@ -74,16 +97,19 @@ const StaffAddMenuScreen = () => {
           <TextInput
             style={styles.inputText}
             placeholder="Name"
+            value={productName}
             onChangeText={(text) => setProductName(text)}
           />
           <TextInput
             style={styles.inputText}
             placeholder="Category"
+            value={productCategory}
             onChangeText={(text) => setProductCategory(text)}
           />
           <TextInput
             style={styles.inputText}
             placeholder="Price"
+            value={productPrice}
             onChangeText={(text) => setProductPrice(text)}
           />
           <TextInput
@@ -94,6 +120,7 @@ const StaffAddMenuScreen = () => {
             placeholder="Description"
             multiline
             numberOfLines={10}
+            value={productDescription}
             onChangeText={(text) => setProductDescription(text)}
           />
         </View>
@@ -110,7 +137,8 @@ const StaffAddMenuScreen = () => {
         <Text
           style={{ color: "#fff", textAlign: "center" }}
           onPress={() =>
-            uploadMenu(
+            updateProduct(
+              product.id,
               image,
               productName,
               productCategory,
@@ -119,11 +147,11 @@ const StaffAddMenuScreen = () => {
             )
           }
         >
-          Upload Menu
+          Update Menu
         </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
 };
 
-export default StaffAddMenuScreen;
+export default StaffUpdateMenuScreen;

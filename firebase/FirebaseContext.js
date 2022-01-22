@@ -86,34 +86,61 @@ export const FirebaseProvider = ({ children }) => {
   };
 
   //Update product
-  //   const updateProduct = async (
-  //     productId,
-  //     productImage,
-  //     productName,
-  //     productPrice,
-  //     productStock,
-  //     productDescription,
-  //     productCategory,
-  //     ingredients,
-  //     instructions
-  //   ) => {
-  //     await updateDoc(doc(db, "products", productId), {
-  //       productImage: productImage,
-  //       productName: productName,
-  //       productPrice: productPrice,
-  //       productStock: productStock,
-  //       productDescription: productDescription,
-  //       productCategory: productCategory,
-  //       ingredients: ingredients,
-  //       instructions: instructions,
-  //     })
-  //       .then(() => {
-  //         console.log("Successfully update product: ", productName);
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   };
+  const updateProduct = async (
+    productId,
+    productImage,
+    productName,
+    productCategory,
+    productPrice,
+    productDescription
+  ) => {
+    let dummyImage = productImage;
+    await menu.forEach(async (product) => {
+      if (product.id === productId) {
+        if (product.productImage !== dummyImage) {
+          let randomId = uuid.v4();
+          let fileExtension = dummyImage.split(".").pop();
+          let fileName = `${randomId}.${fileExtension}`;
+          let response = await fetch(dummyImage);
+          let blob = await response.blob();
+          const productImageRef = ref(storage, `images/${fileName}`);
+          await uploadBytes(productImageRef, blob);
+          await getDownloadURL(ref(storage, productImageRef)).then(
+            async (url) => {
+              await updateDoc(doc(db, "products", productId), {
+                productImage: url,
+              }).then(() => {
+                product.productImage = url;
+                setMenu((prevState) => [...prevState, menu]);
+              });
+            }
+          );
+        }
+      }
+    });
+    await updateDoc(doc(db, "products", productId), {
+      productName: productName,
+      productCategory: productCategory,
+      productPrice: productPrice,
+      productDescription: productDescription,
+    })
+      .then(() => {
+        const updatedMenu = menu;
+        updatedMenu.forEach((product) => {
+          if (product.id === productId) {
+            product.productName = productName;
+            product.productCategory = productCategory;
+            product.productPrice = productPrice;
+            product.productDescription = productDescription;
+          }
+        });
+        setMenu(updatedMenu);
+        alert("Menu Updated Successfully");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   //delete product
   const deleteProduct = async (id) => {
@@ -137,6 +164,7 @@ export const FirebaseProvider = ({ children }) => {
     uploadMenu,
     getMenu,
     deleteProduct,
+    updateProduct,
   };
 
   return (

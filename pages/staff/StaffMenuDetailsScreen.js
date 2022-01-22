@@ -9,9 +9,8 @@ import {
 } from "react-native";
 import { useFirebase } from "../../firebase/FirebaseContext";
 
-const StaffMenuDetailsScreen = ({ route }) => {
+const StaffMenuDetailsScreen = ({ route, navigation }) => {
   const { product } = route.params;
-
   const { deleteProduct } = useFirebase();
 
   return (
@@ -53,6 +52,7 @@ const StaffMenuDetailsScreen = ({ route }) => {
         >
           <Text style={{ color: "#fff", textAlign: "center" }}>DELETE</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={{
             width: "40%",
@@ -62,6 +62,11 @@ const StaffMenuDetailsScreen = ({ route }) => {
             padding: 12,
             backgroundColor: "green",
           }}
+          onPress={() =>
+            navigation.navigate("StaffUpdateMenuScreen", {
+              product: product,
+            })
+          }
         >
           <Text style={{ color: "#fff", textAlign: "center" }}>UPDATE</Text>
         </TouchableOpacity>
