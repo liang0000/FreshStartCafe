@@ -1,20 +1,58 @@
-import * as React from "react";
-import { Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import UserMenu from "../pages/user/menu";
-import OrderScreen from "../pages/user/order";
-import HistoryScreen from "../pages/user/menu";
+import UserMenu from "../pages/user/Menu";
+import OrderScreen from "../pages/user/Order";
+import HistoryScreen from "../pages/user/History";
+import { Icon } from "react-native-elements";
 
 const Tab = createBottomTabNavigator();
 
+//user bottom tab
 const tabNav = () => {
   return (
-    <Tab.Navigator>
-      {/* User */}
-      <Tab.Screen name="menu" component={UserMenu} />
-      <Tab.Screen name="order" component={OrderScreen} />
-      <Tab.Screen name="history" component={HistoryScreen} />
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: () => {
+          const icons = {
+            Menu: "hamburger",
+            Order: "clipboard-list",
+            History: "hourglass-half",
+          };
+          return (
+            <Icon
+              name={icons[route.name]}
+              type="font-awesome-5"
+              color="#000"
+              size={18}
+            />
+          );
+        },
+      })}
+    >
+      <Tab.Screen
+        name="Menu"
+        component={UserMenu}
+        options={{
+          headerShown: false,
+          tabBarLabel: "Menu",
+        }}
+      />
+      <Tab.Screen
+        name="Order"
+        component={OrderScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: "Order",
+        }}
+      />
+      <Tab.Screen
+        name="History"
+        component={HistoryScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: "History",
+        }}
+      />
     </Tab.Navigator>
   );
 };
