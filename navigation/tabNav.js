@@ -15,7 +15,6 @@ const tabNav = () => {
       <Tab.Screen name="menu" component={UserMenu} />
       <Tab.Screen name="order" component={OrderScreen} />
       <Tab.Screen name="history" component={HistoryScreen} />
-      {/* Admin */}
     </Tab.Navigator>
   );
 };

@@ -1,45 +1,57 @@
-import * as React from "react";
-import { Text, View, Button, TouchableOpacity, Alert } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import React, { useState } from "react";
+import {
+  Text,
+  TextInput,
+  View,
+  Button,
+  TouchableOpacity,
+  SafeAreaView,
+  ScrollView,
+} from "react-native";
 import Logo from "../../components/logo";
 import styles from "../../assets/design/styles";
-import AppButton from "../../components/addButton";
+import AppButton from "../../components/AppButton";
 
-const staffLoginScreen = ({ navigation }) => {
-  const [secretKey, setSecretKey] = React.useState("");
-
-  const ScreteKeyValidation = (value) => {
-    if (value === "admin999") {
-      navigation.navigate("menu");
-    } else {
-      alert("invalid secret key");
-    }
-  };
+const StaffLoginScreen = ({ navigation }) => {
+  const [secretKey, setSecretKey] = useState("");
 
   return (
-    <View style={styles.bgColour}>
-      <Logo />
+    <SafeAreaView style={styles.bgColour}>
+      <ScrollView>
+        <Logo />
 
-      <Text style={styles.p}>Please insert Secret Key:</Text>
-      <TextInput
-        style={styles.inputText}
-        placeholder="secret key"
-        secureTextEntry={true}
-        onChangeText={(text) => setSecretKey(text)}
-        value={secretKey}
-      />
+        <Text style={[styles.p, { textAlign: "center" }]}>
+          Please insert Secret Key:
+        </Text>
+        <TextInput
+          style={[styles.inputText, { alignSelf: "center" }]}
+          placeholder="secret key"
+          secureTextEntry={true}
+          onChangeText={setSecretKey}
+          value={secretKey}
+        />
 
-      <TouchableOpacity style={styles.screenContainer}>
-        <AppButton title="Login" onPress={ScreteKeyValidation} />
-      </TouchableOpacity>
-
+        <AppButton
+          title="Login"
+          onPress={() => {
+            if (secretKey === "admin999") {
+              navigation.navigate("StaffBottomTab");
+            } else {
+              alert("Invalid key.");
+            }
+          }}
+        />
+      </ScrollView>
       {/* direct user to prompt seat number */}
-      <Button
-        title="Table Number Insert >>"
-        color="clear"
+      <TouchableOpacity
+        style={{ marginBottom: 12 }}
         onPress={() => navigation.navigate("tableScreen")}
-      />
-    </View>
+      >
+        <Text style={{ color: "#FFF", textAlign: "center" }}>
+          Table Number Insert{" "}
+        </Text>
+      </TouchableOpacity>
+    </SafeAreaView>
   );
 };
-export default staffLoginScreen;
+export default StaffLoginScreen;
