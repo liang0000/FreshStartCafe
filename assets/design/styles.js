@@ -28,11 +28,127 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
     marginBottom: 12,
+    alignSelf: "center",
   },
 
   p: {
     fontSize: 14,
     marginTop: "10%",
+    textAlign: "center",
+  },
+
+  link: {
+    color: "#FFF",
+    textAlign: "center",
+  },
+
+  undLink: {
+    textAlign: "center",
+    textDecorationLine: "underline",
+  },
+
+  filterView: {
+    backgroundColor: "#ddd",
+    padding: 12,
+    marginTop: 12,
+  },
+
+  centerView: {
+    marginTop: 12,
+    alignItems: "center",
+  },
+
+  detailImage: {
+    width: "100%",
+    height: 200,
+  },
+
+  detailNoImage: {
+    width: "100%",
+    height: 200,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  detailText: {
+    marginHorizontal: 12,
+    marginTop: 12,
+    fontSize: 20,
+  },
+
+  detailTextSmall: {
+    marginHorizontal: 12,
+    marginTop: 12,
+  },
+
+  deleteUpdateView: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+  },
+
+  deleteBtn: {
+    width: "40%",
+    alignSelf: "stretch",
+    marginHorizontal: 12,
+    marginBottom: 12,
+    padding: 12,
+    backgroundColor: "#ff0000",
+  },
+
+  deleteStyle: {
+    color: "#fff",
+    textAlign: "center",
+  },
+
+  updateBtn: {
+    width: "40%",
+    alignSelf: "stretch",
+    marginHorizontal: 12,
+    marginBottom: 12,
+    padding: 12,
+    backgroundColor: "green",
+  },
+
+  updateStyle: {
+    color: "#fff",
+    textAlign: "center",
+  },
+
+  uploadStyle: {
+    backgroundColor: "green",
+    marginTop: 12,
+    marginBottom: 12,
+    marginHorizontal: 12,
+    padding: 12,
+  },
+
+  uploadBtn: { color: "#fff", textAlign: "center" },
+
+  foodView: {
+    marginTop: 12,
+    marginHorizontal: 12,
+    padding: 8,
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    shadowOpacity: 0.8,
+    shadowOffset: { width: 10, height: 10 },
+    shadowRadius: 10,
+    elevation: 5,
+  },
+
+  foodImage: { width: 100, height: 55 },
+
+  textName: { marginLeft: 12, marginTop: 12 },
+
+  textPrice: { marginLeft: 18, marginTop: 2, color: "#777" },
+
+  headerBtn: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    marginTop: 12,
+    marginHorizontal: 12,
+    borderWidth: 1,
+    borderRadius: 10,
   },
 
   screenContainer: {

@@ -19,11 +19,9 @@ const tableScreen = ({ navigation }) => {
       <ScrollView>
         <Logo />
 
-        <Text style={[styles.p, { textAlign: "center" }]}>
-          Please enter your seat number:
-        </Text>
+        <Text style={styles.p}>Please enter your seat number:</Text>
         <TextInput
-          style={[styles.inputText, { alignSelf: "center" }]}
+          style={styles.inputText}
           onChangeText={(text) => setSeatNo(text)}
           value={seatNo}
         />
@@ -43,7 +41,7 @@ const tableScreen = ({ navigation }) => {
         style={{ marginBottom: 12 }}
         onPress={() => navigation.navigate("StaffLoginScreen")}
       >
-        <Text style={{ color: "#FFF", textAlign: "center" }}>Staff Login </Text>
+        <Text style={styles.link}>Staff Login </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

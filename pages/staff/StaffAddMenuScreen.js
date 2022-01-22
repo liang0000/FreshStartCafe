@@ -43,34 +43,21 @@ const StaffAddMenuScreen = () => {
           {image !== null ? (
             <Image
               source={{ uri: image }}
-              style={{
-                width: "100%",
-                height: 200,
-              }}
+              style={styles.detailImage}
               resizeMode="cover"
             />
           ) : (
-            <View
-              style={{
-                width: "100%",
-                height: 200,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <View style={styles.detailNoImage}>
               <Text>No Image Selected</Text>
             </View>
           )}
-          <TouchableOpacity style={{ marginHorizontal: 12, marginTop: 12 }}>
-            <Text
-              style={{ textAlign: "center", textDecorationLine: "underline" }}
-              onPress={pickImage}
-            >
+          <TouchableOpacity style={styles.detailTextSmall}>
+            <Text style={styles.undLink} onPress={pickImage}>
               Choose Image
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={{ marginTop: 12, alignItems: "center" }}>
+        <View style={styles.centerView}>
           <TextInput
             style={styles.inputText}
             placeholder="Name"
@@ -98,17 +85,9 @@ const StaffAddMenuScreen = () => {
           />
         </View>
       </ScrollView>
-      <TouchableOpacity
-        style={{
-          backgroundColor: "green",
-          marginTop: 12,
-          marginBottom: 12,
-          marginHorizontal: 12,
-          padding: 12,
-        }}
-      >
+      <TouchableOpacity style={styles.uploadStyle}>
         <Text
-          style={{ color: "#fff", textAlign: "center" }}
+          style={styles.uploadBtn}
           onPress={() =>
             uploadMenu(
               image,

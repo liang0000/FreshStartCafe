@@ -1,19 +1,10 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import styles from "../assets/design/styles";
 
 const HeaderButtonNavigation = ({ title, onPress }) => {
   return (
-    <TouchableOpacity
-      style={{
-        paddingHorizontal: 12,
-        paddingVertical: 6,
-        marginTop: 12,
-        marginHorizontal: 12,
-        borderWidth: 1,
-        borderRadius: 10,
-      }}
-      onPress={onPress}
-    >
+    <TouchableOpacity style={styles.headerBtn} onPress={onPress}>
       <Text>{title}</Text>
     </TouchableOpacity>
   );
