@@ -1,18 +1,17 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import StaffMenuDetailsScreen from "../pages/staff/StaffMenuDetailsScreen";
-import StaffMenuScreen from "../pages/staff/StaffMenuScreen";
-import StaffUpdateMenuScreen from "../pages/staff/StaffUpdateMenuScreen";
+import Menu from "../pages/user/Menu";
+import UserMenuDetailsScreen from "../pages/user/UserMenuDetailsScreen";
 import { Platform, SafeAreaView, StatusBar, Text } from "react-native";
 
 const Stack = createStackNavigator();
 
-const StaffMenuStack = () => {
+const UserMenuStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="StaffMenuScreen"
-        component={StaffMenuScreen}
+        name="Menu"
+        component={Menu}
         options={{
           header: ({ navigation }) => {
             return (
@@ -38,17 +37,12 @@ const StaffMenuStack = () => {
         }}
       />
       <Stack.Screen
-        name="StaffMenuDetailsScreen"
-        component={StaffMenuDetailsScreen}
+        name="UserMenuDetailsScreen"
+        component={UserMenuDetailsScreen}
         options={{ headerTitle: "Menu Details", headerTitleAlign: "center" }}
-      />
-      <Stack.Screen
-        name="StaffUpdateMenuScreen"
-        component={StaffUpdateMenuScreen}
-        options={{ headerTitle: "Update Menu", headerTitleAlign: "center" }}
       />
     </Stack.Navigator>
   );
 };
 
-export default StaffMenuStack;
+export default UserMenuStack;
