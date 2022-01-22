@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 
-const HeaderButtonNavigation = ({ title }) => {
+const HeaderButtonNavigation = ({ title, onPress }) => {
   return (
     <TouchableOpacity
       style={{
@@ -12,7 +12,7 @@ const HeaderButtonNavigation = ({ title }) => {
         borderWidth: 1,
         borderRadius: 10,
       }}
-      onPress={() => {}}
+      onPress={onPress}
     >
       <Text>{title}</Text>
     </TouchableOpacity>

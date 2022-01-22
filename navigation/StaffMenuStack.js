@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import StaffMenuDetailsScreen from "../pages/staff/StaffMenuDetailsScreen";
 import StaffMenuScreen from "../pages/staff/StaffMenuScreen";
 import StaffUpdateMenuScreen from "../pages/staff/StaffUpdateMenuScreen";
-import { Platform, SafeAreaView, StatusBar, Text, View } from "react-native";
+import { Platform, SafeAreaView, StatusBar, Text } from "react-native";
 
 const Stack = createStackNavigator();
 
