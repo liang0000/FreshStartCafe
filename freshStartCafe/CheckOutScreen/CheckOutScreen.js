@@ -9,7 +9,7 @@ import {
   TextInput,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-import { FinalOrder, FinalDetails } from "./FinalOrder";
+import { FinalOrder, FinalDetails } from "../PaymentSuccessScreen/FinalOrder";
 
 const CheckOutSample = [
   {
