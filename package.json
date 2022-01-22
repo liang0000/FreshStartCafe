@@ -8,9 +8,6 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@firebase/auth": "^0.19.6",
-    "@firebase/firestore": "^3.4.3",
-    "@firebase/storage": "^0.9.1",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
     "@stripe/stripe-react-native": "0.2.2",
