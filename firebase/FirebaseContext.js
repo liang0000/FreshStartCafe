@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
-import { onAuthStateChanged } from "@firebase/auth";
 import {
   collection,
   doc,
@@ -21,6 +20,7 @@ export const useFirebase = () => {
 
 export const FirebaseProvider = ({ children }) => {
   const [menu, setMenu] = useState([]);
+  const [cart, setCart] = useState([]);
 
   // Upload menu's image to Storage and Firestore
   const uploadMenu = async (
@@ -74,6 +74,7 @@ export const FirebaseProvider = ({ children }) => {
     }
   };
 
+  //Read products
   const getMenu = async () => {
     let products = [];
     const querySnapshot = await getDocs(collection(db, "products"));
@@ -142,7 +143,7 @@ export const FirebaseProvider = ({ children }) => {
       });
   };
 
-  //delete product
+  //Delete product
   const deleteProduct = async (id) => {
     await deleteDoc(doc(db, "products", id))
       .then(() => {
@@ -158,6 +159,58 @@ export const FirebaseProvider = ({ children }) => {
       });
   };
 
+  //----------------------Cart-----------------------------
+  //Add to Cart
+  const addCart = async (
+    productImage,
+    productName,
+    productPrice,
+    productQuan,
+    productID,
+    seatNo
+  ) => {
+    if (productQuan !== 0) {
+      await addDoc(collection(db, "carts"), {
+        productImage: productImage,
+        productName: productName,
+        productPrice: productPrice,
+        productQuan: productQuan,
+        productID: productID,
+        seatNo: seatNo,
+      })
+        .then((docRef) => {
+          const product = {
+            id: docRef.id,
+            productImage: productImage,
+            productName: productName,
+            productPrice: productPrice,
+            productQuan: productQuan,
+            seatNo: seatNo,
+          };
+          setCart((prevState) => [...prevState, product]);
+          console.log("Successfully added to cart");
+          alert({ productName } + " added to cart");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      alert("Quantity of food or drink cannot be 0");
+    }
+  };
+
+  //Read Carts
+  const getCart = async () => {
+    let carts = [];
+    const querySnapshot = await getDocs(collection(db, "carts"));
+    querySnapshot.forEach((cart) => {
+      const cartData = cart.data();
+      cartData.id = cart.id;
+      carts.push(cartData);
+    });
+    setCart(carts);
+  };
+
   //allows those function to be called later in other pages
   const value = {
     menu,
@@ -165,6 +218,9 @@ export const FirebaseProvider = ({ children }) => {
     getMenu,
     deleteProduct,
     updateProduct,
+    cart,
+    addCart,
+    getCart,
   };
 
   return (
