@@ -9,6 +9,7 @@ import {
 import HeaderButtonNavigation from "../../components/HeaderButtonNavigation";
 import FoodList from "../../components/FoodList";
 import { useFirebase } from "../../firebase/FirebaseContext";
+import styles from "../../assets/design/styles";
 
 const StaffMenuScreen = ({ navigation }) => {
   const categories = [
@@ -38,7 +39,7 @@ const StaffMenuScreen = ({ navigation }) => {
         ))}
       </ScrollView>
       <ScrollView>
-        <View style={{ backgroundColor: "#ddd", padding: 12, marginTop: 12 }}>
+        <View style={styles.filterView}>
           <Text>{filter}</Text>
         </View>
 

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useFirebase } from "../../firebase/FirebaseContext";
+import styles from "../../assets/design/styles";
 
 const StaffMenuDetailsScreen = ({ route, navigation }) => {
   const { product } = route.params;
@@ -17,58 +18,33 @@ const StaffMenuDetailsScreen = ({ route, navigation }) => {
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <Image
-          style={{ width: "100%", height: 200 }}
+          style={styles.detailImage}
           resizeMode="cover"
           source={{
             uri: product.productImage,
           }}
         />
-        <Text style={{ marginHorizontal: 12, marginTop: 12, fontSize: 20 }}>
-          {product.productName}
-        </Text>
-        <Text style={{ marginHorizontal: 12, marginTop: 12 }}>
-          {product.productDescription}
-        </Text>
-        <Text style={{ marginHorizontal: 12, marginTop: 12, fontSize: 20 }}>
-          RM {product.productPrice}
-        </Text>
+        <Text style={styles.detailText}>{product.productName}</Text>
+        <Text style={styles.detailTextSmall}>{product.productDescription}</Text>
+        <Text style={styles.detailText}>RM {product.productPrice}</Text>
       </ScrollView>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-        }}
-      >
+      <View style={styles.deleteUpdateView}>
         <TouchableOpacity
-          style={{
-            width: "40%",
-            alignSelf: "stretch",
-            marginHorizontal: 12,
-            marginBottom: 12,
-            padding: 12,
-            backgroundColor: "#ff0000",
-          }}
+          style={styles.deleteBtn}
           onPress={() => deleteProduct(product.id)}
         >
-          <Text style={{ color: "#fff", textAlign: "center" }}>DELETE</Text>
+          <Text style={styles.deleteStyle}>DELETE</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={{
-            width: "40%",
-            alignSelf: "stretch",
-            marginHorizontal: 12,
-            marginBottom: 12,
-            padding: 12,
-            backgroundColor: "green",
-          }}
+          style={styles.updateBtn}
           onPress={() =>
             navigation.navigate("StaffUpdateMenuScreen", {
               product: product,
             })
           }
         >
-          <Text style={{ color: "#fff", textAlign: "center" }}>UPDATE</Text>
+          <Text style={styles.updateStyle}>UPDATE</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

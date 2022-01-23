@@ -9,8 +9,9 @@ import {
 import HeaderButtonNavigation from "../../components/HeaderButtonNavigation";
 import FoodList from "../../components/FoodList";
 import { useFirebase } from "../../firebase/FirebaseContext";
+import styles from "../../assets/design/styles";
 
-const menu = ({ navigation }) => {
+const Menu = ({ navigation }) => {
   const categories = [
     "All Menu",
     "Asian",
@@ -38,7 +39,7 @@ const menu = ({ navigation }) => {
         ))}
       </ScrollView>
       <ScrollView>
-        <View style={{ backgroundColor: "#ddd", padding: 12, marginTop: 12 }}>
+        <View style={styles.filterView}>
           <Text>{filter}</Text>
         </View>
 
@@ -88,4 +89,4 @@ const menu = ({ navigation }) => {
   );
 };
 
-export default menu;
+export default Menu;

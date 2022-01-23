@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { useFirebase } from "../../firebase/FirebaseContext";
+import styles from "../../assets/design/styles";
 
 const UserMenuDetailsScreen = ({ route, navigation }) => {
   const { product } = route.params;
@@ -16,21 +16,15 @@ const UserMenuDetailsScreen = ({ route, navigation }) => {
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <Image
-          style={{ width: "100%", height: 200 }}
+          style={styles.detailImage}
           resizeMode="cover"
           source={{
             uri: product.productImage,
           }}
         />
-        <Text style={{ marginHorizontal: 12, marginTop: 12, fontSize: 20 }}>
-          {product.productName}
-        </Text>
-        <Text style={{ marginHorizontal: 12, marginTop: 12 }}>
-          {product.productDescription}
-        </Text>
-        <Text style={{ marginHorizontal: 12, marginTop: 12, fontSize: 20 }}>
-          RM {product.productPrice}
-        </Text>
+        <Text style={styles.detailText}>{product.productName}</Text>
+        <Text style={styles.detailTextSmall}>{product.productDescription}</Text>
+        <Text style={styles.detailText}>RM {product.productPrice}</Text>
       </ScrollView>
     </SafeAreaView>
   );

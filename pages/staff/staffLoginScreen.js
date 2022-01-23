@@ -20,11 +20,9 @@ const StaffLoginScreen = ({ navigation }) => {
       <ScrollView>
         <Logo />
 
-        <Text style={[styles.p, { textAlign: "center" }]}>
-          Please insert Secret Key:
-        </Text>
+        <Text style={styles.p}>Please insert Secret Key:</Text>
         <TextInput
-          style={[styles.inputText, { alignSelf: "center" }]}
+          style={styles.inputText}
           placeholder="secret key"
           secureTextEntry={true}
           onChangeText={setSecretKey}
@@ -47,9 +45,7 @@ const StaffLoginScreen = ({ navigation }) => {
         style={{ marginBottom: 12 }}
         onPress={() => navigation.navigate("tableScreen")}
       >
-        <Text style={{ color: "#FFF", textAlign: "center" }}>
-          Table Number Insert{" "}
-        </Text>
+        <Text style={styles.link}>Table Number Insert </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
