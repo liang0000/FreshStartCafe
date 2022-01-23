@@ -13,14 +13,17 @@ import * as ImagePicker from "expo-image-picker";
 import { useFirebase } from "../../firebase/FirebaseContext";
 
 const StaffAddMenuScreen = () => {
+  //constances
   const [image, setImage] = useState(null);
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("");
+
   // Firebase function
   const { uploadMenu } = useFirebase();
 
+  //access to user libray
   const pickImage = async () => {
     await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
