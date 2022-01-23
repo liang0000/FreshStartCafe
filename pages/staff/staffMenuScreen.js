@@ -12,6 +12,7 @@ import { useFirebase } from "../../firebase/FirebaseContext";
 import styles from "../../assets/design/styles";
 
 const StaffMenuScreen = ({ navigation }) => {
+  //list of categories
   const categories = [
     "All Menu",
     "Asian",
@@ -23,6 +24,7 @@ const StaffMenuScreen = ({ navigation }) => {
   const { menu, getMenu } = useFirebase();
   const [filter, setFilter] = useState("All Menu");
 
+  //render once page load
   useEffect(() => {
     getMenu();
   }, []);

@@ -142,6 +142,14 @@ const styles = StyleSheet.create({
 
   textPrice: { marginLeft: 18, marginTop: 2, color: "#777" },
 
+  counterGroup: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingRight: 12,
+  },
+
+  counterStyle: { flexDirection: "row", marginTop: 20 },
+
   headerBtn: {
     paddingHorizontal: 12,
     paddingVertical: 6,

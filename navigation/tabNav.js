@@ -1,9 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import UserMenu from "../pages/user/Menu";
 import OrderScreen from "../pages/user/Order";
 import HistoryScreen from "../pages/user/History";
 import { Icon } from "react-native-elements";
+import UserMenuStack from "./UserMenuStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -31,7 +31,7 @@ const tabNav = () => {
     >
       <Tab.Screen
         name="Menu"
-        component={UserMenu}
+        component={UserMenuStack}
         options={{
           headerShown: false,
           tabBarLabel: "Menu",
