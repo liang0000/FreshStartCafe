@@ -28,11 +28,15 @@ const tableScreen = ({ navigation }) => {
 
         <AppButton
           title="Check Out Our Menu ->"
-          onPress={() =>
-            navigation.push("tabNav", {
-              seatNoID: seatNo,
-            })
-          }
+          onPress={() => {
+            if (seatNo !== "") {
+              navigation.navigate("tabNav", {
+                seatNoID: seatNo,
+              });
+            } else {
+              alert("Please insert your seat number");
+            }
+          }}
         />
       </ScrollView>
 
