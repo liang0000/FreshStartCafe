@@ -142,6 +142,14 @@ const styles = StyleSheet.create({
 
   textPrice: { marginLeft: 18, marginTop: 2, color: "#777" },
 
+  counterGroup: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingRight: 12,
+  },
+
+  counterStyle: { flexDirection: "row", marginTop: 20 },
+
   headerBtn: {
     paddingHorizontal: 12,
     paddingVertical: 6,
@@ -174,6 +182,26 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
     textTransform: "uppercase",
+  },
+
+  history: {
+    flexDirection: "row",
+    backgroundColor: "#FFFFFF",
+    padding: 10,
+    margin: 3,
+    height: 70,
+  },
+
+  historyTableNum: {
+    alignSelf: "center",
+    fontSize: 18,
+  },
+
+  historyInfo: {
+    flex: 3,
+    alignItems: "flex-end",
+    flexDirection: "column",
+    alignSelf: "center",
   },
 });
 

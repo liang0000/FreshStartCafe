@@ -1,9 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import UserMenuStack from "./UserMenuStack";
 import OrderScreen from "../pages/user/Order";
 import HistoryScreen from "../pages/user/History";
 import { Icon } from "react-native-elements";
+import UserMenuStack from "./UserMenuStack";
 
 const Tab = createBottomTabNavigator();
 

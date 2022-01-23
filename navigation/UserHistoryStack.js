@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Menu from "../pages/user/Menu";
-import UserMenuDetailsScreen from "../pages/user/UserMenuDetailsScreen";
+import HistoryScreen from "../pages/user/HistoryScreen";
+import HistoryDetailsScreen from "../pages/user/HistoryDetailsScreen";
 import { Platform, SafeAreaView, StatusBar, Text } from "react-native";
 
 const Stack = createStackNavigator();
@@ -10,8 +10,8 @@ const UserHistoryStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Menu"
-        component={Menu}
+        name="HistoryScreen"
+        component={HistoryScreen}
         options={{
           header: ({ navigation }) => {
             return (
@@ -30,16 +30,16 @@ const UserHistoryStack = () => {
                   elevation: 5,
                 }}
               >
-                <Text style={{ fontSize: 22 }}>Menu</Text>
+                <Text style={{ fontSize: 22 }}>History</Text>
               </SafeAreaView>
             );
           },
         }}
       />
       <Stack.Screen
-        name="UserMenuDetailsScreen"
-        component={UserMenuDetailsScreen}
-        options={{ headerTitle: "Menu Details", headerTitleAlign: "center" }}
+        name="HistoryDetailsScreen"
+        component={HistoryDetailsScreen}
+        options={{ headerTitle: "History Details", headerTitleAlign: "center" }}
       />
     </Stack.Navigator>
   );
