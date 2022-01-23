@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import {
   View,
-  StyleSheet,
   TextInput,
-  Button,
   Alert,
   Text,
   TouchableOpacity,
@@ -14,11 +12,12 @@ import {
   useConfirmPayment,
   StripeProvider,
 } from "@stripe/stripe-react-native";
+import styles from "../../assets/design/styles";
 
 //ADD localhost address of your server
 const API_URL = "http://localhost:3000";
 
-const CardPayment = (props) => {
+const CardPaymentScreen = (props) => {
   const [email, setEmail] = useState();
   const [cardDetails, setCardDetails] = useState();
   const { confirmPayment, loading } = useConfirmPayment();
@@ -79,25 +78,20 @@ const CardPayment = (props) => {
             placeholder="E-Mail"
             keyboardType="email-address"
             onChange={(value) => setEmail(value.nativeEvent.text)}
-            style={styles.input}
+            style={styles.cardInput}
           />
           <CardField
             postalCodeEnabled="false"
             placeholder={{
               number: "4242 4242 4242 4242",
             }}
-            cardStyle={styles.card}
-            style={styles.cardContainer}
+            cardStyle={{ backgroundColor: "#efefefef" }}
+            style={{ height: 50, marginVertical: 30 }}
             onCardChange={(cardDetails) => setCardDetails(cardDetails)}
           />
         </View>
         <TouchableOpacity
-          style={{
-            alignItems: "center",
-            padding: 15,
-            backgroundColor: "white",
-            borderRadius: 5,
-          }}
+          style={styles.payButton}
           onPress={handlePayPress}
           disabled={loading}
         >
@@ -107,21 +101,5 @@ const CardPayment = (props) => {
     </StripeProvider>
   );
 };
-export default CardPayment;
 
-const styles = StyleSheet.create({
-  input: {
-    backgroundColor: "#efefefef",
-    borderRadius: 8,
-    fontSize: 20,
-    height: 50,
-    padding: 10,
-  },
-  card: {
-    backgroundColor: "#efefefef",
-  },
-  cardContainer: {
-    height: 50,
-    marginVertical: 30,
-  },
-});
+export default CardPaymentScreen;

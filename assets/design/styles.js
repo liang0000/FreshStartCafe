@@ -203,6 +203,89 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignSelf: "center",
   },
+
+  orderPic: { flex: 1, height: "auto", width: "auto", resizeMode: "contain" },
+
+  order: {
+    flexDirection: "row",
+    backgroundColor: "#FFFFFF",
+    padding: 10,
+    margin: 3,
+    height: 70,
+  },
+
+  orderInfo: {
+    flex: 3,
+    alignItems: "flex-start",
+    flexDirection: "column",
+    alignSelf: "center",
+  },
+
+  orderButton: {
+    alignItems: "flex-end",
+    flexDirection: "row",
+    alignSelf: "center",
+    marginRight: 20,
+    fontSize: 18,
+  },
+
+  totalAmount: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    borderWidth: 1,
+    height: 50,
+    margin: 2,
+  },
+
+  totalPrice: {
+    fontWeight: "bold",
+    color: "red",
+    marginRight: 10,
+  },
+
+  totalButton: {
+    padding: 15,
+    borderLeftWidth: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+
+  finalOrderPic: {
+    flex: 1,
+    height: "auto",
+    width: "auto",
+    resizeMode: "contain",
+  },
+
+  finalOrder: {
+    flexDirection: "row",
+    backgroundColor: "#FFFFFF",
+    padding: 10,
+    margin: 3,
+    height: 70,
+  },
+
+  finalOrderInfo: {
+    flex: 3,
+    flexDirection: "column",
+    alignSelf: "center",
+  },
+
+  payButton: {
+    alignItems: "center",
+    padding: 15,
+    backgroundColor: "white",
+    borderRadius: 5,
+  },
+
+  cardInput: {
+    backgroundColor: "#efefefef",
+    borderRadius: 8,
+    fontSize: 20,
+    height: 50,
+    padding: 10,
+  },
 });
 
 export default styles;

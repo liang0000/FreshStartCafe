@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import {
   View,
-  StyleSheet,
   Text,
   TouchableOpacity,
   SafeAreaView,
   FlatList,
 } from "react-native";
-import { FinalOrder, FinalDetails } from "./FinalOrder";
+import FinalDetails from "../../components/FinalDetails";
+import FinalOrderList from "../../components/FinalOrderList";
+import styles from "../../assets/design/styles";
 
 const PaymentSuccessSample = [
   {
@@ -27,21 +28,10 @@ const PaymentSuccessSample = [
   },
 ];
 
-const DetailsSample = [
-  {
-    id: "0001",
-    tableNumber: 5,
-    totalPrice: 35,
-    message: "Please add more sourse",
-    paymentMethod: "Credit / Debit Card",
-    orderTime: "23-11-2021 16:04",
-  },
-];
-
-const PaymentSuccessList = ({ navigation }) => {
+const PaymentSuccessScreen = ({ navigation }) => {
   const renderOrder = ({ item }) => {
     return (
-      <FinalOrder
+      <FinalOrderList
         picURL={item.picURL}
         name={item.name}
         price={item.price}
@@ -50,24 +40,12 @@ const PaymentSuccessList = ({ navigation }) => {
     );
   };
 
-  const renderDetails = ({ item }) => {
-    return (
-      <FinalDetails
-        tableNumber={item.tableNumber}
-        totalPrice={item.totalPrice}
-        message={item.message}
-        paymentMethod={item.paymentMethod}
-        orderTime={item.orderTime}
-      />
-    );
-  };
-
   return (
     <SafeAreaView style={{ backgroundColor: "#d3d3cb", flex: 1 }}>
       <View>
-        <Text style={{ fontSize: 21, alignSelf: "center" }}>
+        {/* <Text style={{ fontSize: 21, alignSelf: "center" }}>
           Payment Success
-        </Text>
+        </Text> */}
         <Text style={{ fontSize: 35, alignSelf: "center", marginTop: 70 }}>
           Thank You
         </Text>
@@ -82,13 +60,15 @@ const PaymentSuccessList = ({ navigation }) => {
           renderItem={renderOrder}
           keyExtractor={(item, index) => item.rank + index}
         />
-        <FlatList
-          data={DetailsSample}
-          renderItem={renderDetails}
-          keyExtractor={(item, index) => item.id + index}
-        />
+        <View style={{ margin: 20 }}>
+          <FinalDetails label="Table Number" text="" />
+          <FinalDetails label="Total Price" text="" />
+          <FinalDetails label="Message" text="" />
+          <FinalDetails label="Payment Method" text="" />
+          <FinalDetails label="Order Time" text="" />
+        </View>
         <TouchableOpacity
-          style={styles.button}
+          style={[styles.payButton, { margin: 20, marginTop: 140 }]}
           onPress={() => navigation.navigate("Menu")}
         >
           <Text style={{ fontSize: 16 }}>Back to Menu</Text>
@@ -98,15 +78,4 @@ const PaymentSuccessList = ({ navigation }) => {
   );
 };
 
-export default PaymentSuccessList;
-
-const styles = StyleSheet.create({
-  button: {
-    alignItems: "center",
-    padding: 15,
-    backgroundColor: "white",
-    borderRadius: 5,
-    margin: 20,
-    marginTop: 140,
-  },
-});
+export default PaymentSuccessScreen;

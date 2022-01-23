@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import {
-  StyleSheet,
   FlatList,
   SafeAreaView,
   View,
   Text,
-  TouchableOpacity,
   TextInput,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-import { FinalOrder, FinalDetails } from "../PaymentSuccessScreen/FinalOrder";
+import FinalOrderList from "../../components/FinalOrderList";
+import TotalAmount from "../../components/TotalAmount";
 
 const CheckOutSample = [
   {
@@ -29,32 +28,15 @@ const CheckOutSample = [
   },
 ];
 
-const tableNum = 7;
 
-const TotalAmount = () => {
-  const totalPrice = 45;
+const CheckOutScreen = () => {
+  const tableNum = 7;
+  const [message, onChangeMessage] = useState("");
+  const [payment, setPayment] = useState("");
 
-  return (
-    <View style={styles.totalAmount}>
-      <Text style={styles.totalPrice}>Total: RM{totalPrice}</Text>
-      <TouchableOpacity
-        style={{
-          padding: 15,
-          borderLeftWidth: 1,
-          paddingLeft: 10,
-          paddingRight: 10,
-        }}
-      >
-        <Text style={styles.placeOrder}>Place Order</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const CheckOutList = () => {
   const renderItem = ({ item }) => {
     return (
-      <FinalOrder
+      <FinalOrderList
         picURL={item.picURL}
         name={item.name}
         price={item.price}
@@ -62,9 +44,6 @@ const CheckOutList = () => {
       />
     );
   };
-
-  const [message, onChangeMessage] = useState("");
-  const [payment, setPayment] = useState("");
 
   return (
     <SafeAreaView style={{ backgroundColor: "#d3d3cb", flex: 1 }}>
@@ -94,26 +73,9 @@ const CheckOutList = () => {
           ]}
         />
       </View>
-      <TotalAmount></TotalAmount>
+      <TotalAmount totalPrice="55" text="Place Order" onPress={}/>
     </SafeAreaView>
   );
 };
 
-export default CheckOutList;
-
-const styles = StyleSheet.create({
-  totalAmount: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    borderWidth: 1,
-    height: 50,
-    margin: 2,
-  },
-  totalPrice: {
-    fontWeight: "bold",
-    color: "red",
-    marginRight: 10,
-  },
-  placeOrder: { color: "red", fontWeight: "bold" },
-});
+export default CheckOutScreen;

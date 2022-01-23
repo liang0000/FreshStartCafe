@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import StaffMenuDetailsScreen from "../pages/staff/StaffMenuDetailsScreen";
 import StaffMenuScreen from "../pages/staff/StaffMenuScreen";
 import StaffUpdateMenuScreen from "../pages/staff/StaffUpdateMenuScreen";
-import { Platform, SafeAreaView, StatusBar, Text } from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -13,7 +12,7 @@ const StaffMenuStack = () => {
       <Stack.Screen
         name="StaffMenuScreen"
         component={StaffMenuScreen}
-        options={{ headerTitle: "Menu Details", headerTitleAlign: "center" }}
+        options={{ headerTitle: "Menu", headerTitleAlign: "center" }}
       />
       <Stack.Screen
         name="StaffMenuDetailsScreen"
