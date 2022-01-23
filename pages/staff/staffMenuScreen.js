@@ -30,7 +30,7 @@ const StaffMenuScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ paddingBottom: 50 }}>
       <ScrollView horizontal>
         {categories.map((category, i) => (
           <HeaderButtonNavigation
