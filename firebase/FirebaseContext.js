@@ -21,6 +21,7 @@ export const useFirebase = () => {
 
 export const FirebaseProvider = ({ children }) => {
   const [menu, setMenu] = useState([]);
+  const [seatNoID, setSeatNoID] = useState(null);
 
   // Upload menu's image to Storage and Firestore
   const uploadMenu = async (
@@ -161,6 +162,8 @@ export const FirebaseProvider = ({ children }) => {
   //allows those function to be called later in other pages
   const value = {
     menu,
+    seatNoID,
+    setSeatNoID,
     uploadMenu,
     getMenu,
     deleteProduct,

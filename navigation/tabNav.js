@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import OrderScreen from "../pages/user/Order";
 import HistoryScreen from "../pages/user/History";
@@ -9,6 +9,8 @@ const Tab = createBottomTabNavigator();
 
 //user bottom tab
 const tabNav = () => {
+  useEffect(() => {});
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

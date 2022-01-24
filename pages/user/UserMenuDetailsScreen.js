@@ -9,13 +9,15 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import styles from "../../assets/design/styles";
+import { useFirebase } from "../../firebase/FirebaseContext";
 
 const UserMenuDetailsScreen = ({ route, navigation }) => {
   const [counter, setCounter] = useState(1);
   const { product } = route.params;
+  const { seatNoID } = useFirebase();
 
   useEffect(() => {
-    console.log(product);
+    console.log("seattt" + seatNoID);
   }, []);
 
   return (
