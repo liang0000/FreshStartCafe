@@ -71,7 +71,7 @@ const CardPaymentScreen = (props) => {
         <View style={{ justifyContent: "center", flexGrow: 1 }}>
           <Image
             style={{ width: 350, height: 100, resizeMode: "center" }}
-            source={require("./assets/visamastercardamex.png")}
+            source={require("../../assets/visamastercardamex.png")}
           />
           <TextInput
             autoCapitalize="none"

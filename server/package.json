@@ -11,10 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "stripe": "^8.193.0"
+    "stripe": "^8.199.0"
   },
   "devDependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.2",
     "nodemon": "^2.0.15"
   }
 }
