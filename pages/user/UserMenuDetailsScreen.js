@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -15,6 +15,10 @@ const UserMenuDetailsScreen = ({ route, navigation }) => {
   const [counter, setCounter] = useState(1);
   const { product, seatNoID } = route.params;
   const { addCart } = useFirebase();
+
+  useEffect(() => {
+    console.log(product);
+  }, []);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
