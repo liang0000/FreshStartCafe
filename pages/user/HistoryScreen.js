@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, SafeAreaView } from "react-native";
-import History from "./History";
+import HistoryList from "../../components/HistoryList";
 
 const HistorySample = [
   {
@@ -17,9 +17,11 @@ const HistorySample = [
   },
 ];
 
-const HistoryList = () => {
+const HistoryScreen = () => {
   const renderItem = ({ item }) => {
-    return <History table={item.table} price={item.price} date={item.date} />;
+    return (
+      <HistoryList table={item.table} price={item.price} date={item.date} />
+    );
   };
 
   return (
@@ -33,4 +35,4 @@ const HistoryList = () => {
   );
 };
 
-export default HistoryList;
+export default HistoryScreen;

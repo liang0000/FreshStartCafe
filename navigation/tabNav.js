@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import OrderScreen from "../pages/user/Order";
-import HistoryScreen from "../pages/user/History";
 import { Icon } from "react-native-elements";
 import UserMenuStack from "./UserMenuStack";
+import UserOrderStack from "./UserOrderStack";
+import UserHistoryStack from "./UserHistoryStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +41,7 @@ const tabNav = () => {
       />
       <Tab.Screen
         name="Order"
-        component={OrderScreen}
+        component={UserOrderStack}
         options={{
           headerShown: false,
           tabBarLabel: "Order",
@@ -49,7 +49,7 @@ const tabNav = () => {
       />
       <Tab.Screen
         name="History"
-        component={HistoryScreen}
+        component={UserHistoryStack}
         options={{
           headerShown: false,
           tabBarLabel: "History",

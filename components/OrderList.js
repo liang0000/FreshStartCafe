@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
+import styles from "../assets/design/styles";
 
-const Order = (props) => {
+const OrderList = (props) => {
   return (
     <View style={styles.order}>
       <Image style={styles.pic} source={props.picURL}></Image>
@@ -38,28 +39,4 @@ const Button = () => {
   );
 };
 
-export default Order;
-
-const styles = StyleSheet.create({
-  pic: { flex: 1, height: "auto", width: "auto", resizeMode: "contain" },
-  order: {
-    flexDirection: "row",
-    backgroundColor: "#FFFFFF",
-    padding: 10,
-    margin: 3,
-    height: 70,
-  },
-  info: {
-    flex: 3,
-    alignItems: "flex-start",
-    flexDirection: "column",
-    alignSelf: "center",
-  },
-  button: {
-    alignItems: "flex-end",
-    flexDirection: "row",
-    alignSelf: "center",
-    marginRight: 20,
-    fontSize: 18,
-  },
-});
+export default OrderList;
