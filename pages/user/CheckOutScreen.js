@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  FlatList,
-  SafeAreaView,
-  View,
-  Text,
-  TextInput,
-} from "react-native";
+import { FlatList, SafeAreaView, View, Text, TextInput } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import FinalOrderList from "../../components/FinalOrderList";
 import TotalAmount from "../../components/TotalAmount";
@@ -27,7 +21,6 @@ const CheckOutSample = [
     quantity: 2,
   },
 ];
-
 
 const CheckOutScreen = () => {
   const tableNum = 7;
@@ -73,7 +66,7 @@ const CheckOutScreen = () => {
           ]}
         />
       </View>
-      <TotalAmount totalPrice="55" text="Place Order" onPress={}/>
+      <TotalAmount totalPrice="55" text="Place Order" />
     </SafeAreaView>
   );
 };

@@ -9,10 +9,12 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import styles from "../../assets/design/styles";
+import { useFirebase } from "../../firebase/FirebaseContext";
 
 const UserMenuDetailsScreen = ({ route, navigation }) => {
   const [counter, setCounter] = useState(1);
-  const { product } = route.params;
+  const { product, seatNoID } = route.params;
+  const { addCart } = useFirebase();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -44,7 +46,22 @@ const UserMenuDetailsScreen = ({ route, navigation }) => {
 
       {/* add order button */}
       <TouchableOpacity style={styles.uploadStyle}>
-        <Text style={styles.uploadBtn}>add to cart</Text>
+        <Text
+          style={styles.uploadBtn}
+          onPress={() =>
+            // addCart(
+            //   product.productImage,
+            //   product.productName,
+            //   product.productPrice,
+            //   counter,
+            //   product.id,
+            //   seatNoID
+            // )
+            alert(product.id + seatNoID)
+          }
+        >
+          add to cart
+        </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

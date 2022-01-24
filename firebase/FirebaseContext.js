@@ -171,12 +171,12 @@ export const FirebaseProvider = ({ children }) => {
   ) => {
     if (productQuan !== 0) {
       await addDoc(collection(db, "carts"), {
-        productImage: productImage,
-        productName: productName,
-        productPrice: productPrice,
-        productQuan: productQuan,
-        productID: productID,
-        seatNo: seatNo,
+        productImage,
+        productName,
+        productPrice,
+        productQuan,
+        productID,
+        seatNo,
       })
         .then((docRef) => {
           const product = {

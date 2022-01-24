@@ -21,7 +21,9 @@ const OrdersSample = [
 
 const OrderScreen = () => {
   const renderItem = ({ item }) => {
-    return <OrderList picURL={item.picURL} name={item.name} price={item.price} />;
+    return (
+      <OrderList picURL={item.picURL} name={item.name} price={item.price} />
+    );
   };
 
   return (
@@ -31,7 +33,7 @@ const OrderScreen = () => {
         renderItem={renderItem}
         keyExtractor={(item, index) => item.name + index}
       />
-      <TotalAmount totalPrice="55" text="Check Out" onPress={}/>
+      <TotalAmount totalPrice="55" text="Check Out" />
     </SafeAreaView>
   );
 };
