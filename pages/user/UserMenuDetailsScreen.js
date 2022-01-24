@@ -13,11 +13,11 @@ import { useFirebase } from "../../firebase/FirebaseContext";
 
 const UserMenuDetailsScreen = ({ route, navigation }) => {
   const [counter, setCounter] = useState(1);
-  const { product, seatNoID } = route.params;
-  const { addCart } = useFirebase();
+  const { product } = route.params;
+  const { seatNoID, addCart } = useFirebase();
 
   useEffect(() => {
-    console.log(product);
+    console.log("seattt" + seatNoID);
   }, []);
 
   return (

@@ -2,7 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { FirebaseProvider } from "./firebase/FirebaseContext";
-import TableScreen from "./pages/user/TableScreen";
+import TableScreen from "./pages/user/tableScreen";
 import StaffLoginScreen from "./pages/staff/StaffLoginScreen";
 import TabNavigation from "./navigation/tabNav";
 import StaffBottomTab from "./navigation/StaffBottomTab";

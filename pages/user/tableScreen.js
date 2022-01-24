@@ -9,9 +9,11 @@ import { TextInput } from "react-native-gesture-handler";
 import styles from "../../assets/design/styles";
 import Logo from "../../components/logo";
 import AppButton from "../../components/AppButton";
+import { useFirebase } from "../../firebase/FirebaseContext";
 
 const tableScreen = ({ navigation }) => {
   const [seatNo, setSeatNo] = React.useState("");
+  const { setSeatNoID } = useFirebase();
 
   return (
     <SafeAreaView style={styles.bgColour}>
@@ -32,6 +34,7 @@ const tableScreen = ({ navigation }) => {
               navigation.navigate("tabNav", {
                 seatNoID: seatNo,
               });
+              setSeatNoID(seatNo);
             } else {
               alert("Please insert your seat number");
             }

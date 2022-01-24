@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-elements";
 import UserMenuStack from "./UserMenuStack";
@@ -9,6 +9,8 @@ const Tab = createBottomTabNavigator();
 
 //user bottom tab
 const tabNav = () => {
+  useEffect(() => {});
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
