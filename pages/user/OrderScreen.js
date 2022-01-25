@@ -43,12 +43,14 @@ const OrderScreen = ({ navigation }) => {
       <TotalAmount
         totalPrice={total}
         text="Check Out"
-        onPress={() =>
-          navigation.navigate("CheckOutScreen", {
-            cart: cart,
-            total: total,
-          })
-        }
+        onPress={() => {
+          if (cart.length !== 0) {
+            navigation.navigate("CheckOutScreen", {
+              cart: cart,
+              total: total,
+            });
+          }
+        }}
       />
     </SafeAreaView>
   );

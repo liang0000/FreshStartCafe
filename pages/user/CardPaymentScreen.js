@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import {
   View,
   TextInput,
-  Alert,
   Text,
   TouchableOpacity,
   Image,
+  SafeAreaView,
 } from "react-native";
 import {
   CardField,
@@ -13,62 +13,22 @@ import {
   StripeProvider,
 } from "@stripe/stripe-react-native";
 import styles from "../../assets/design/styles";
+import { useFirebase } from "../../firebase/FirebaseContext";
 
-//ADD localhost address of your server
-const API_URL = "http://localhost:3000";
+const pk =
+  "pk_test_51K5Xv8FTDfvNWTlBDZOFUUpz7yp8KldtNXsUc1oVV8TJxQv0aEYeiPfz1o09GXBGkXluJUU2nrzk6HaMvcF0Q7X400e2aoMFXu";
 
-const CardPaymentScreen = (props) => {
+const CardPaymentScreen = ({ route, navigation }) => {
+  const { cart, seatNo, payment, message, total } = route.params;
+  const { payOrder } = useFirebase();
   const [email, setEmail] = useState();
   const [cardDetails, setCardDetails] = useState();
   const { confirmPayment, loading } = useConfirmPayment();
 
-  const fetchPaymentIntentClientSecret = async () => {
-    const response = await fetch(`${API_URL}/create-payment-intent`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const { clientSecret, error } = await response.json();
-    return { clientSecret, error };
-  };
-
-  const handlePayPress = async () => {
-    //1.Gather the customer's billing information (e.g., email)
-    if (!cardDetails?.complete || !email) {
-      Alert.alert("Please enter Complete card details and Email");
-      return;
-    }
-    const billingDetails = {
-      email: email,
-    };
-    //2.Fetch the intent client secret from the backend
-    try {
-      const { clientSecret, error } = await fetchPaymentIntentClientSecret();
-      //2. confirm the payment
-      if (error) {
-        console.log("Unable to process payment");
-      } else {
-        const { paymentIntent, error } = await confirmPayment(clientSecret, {
-          type: "Card",
-          billingDetails: billingDetails,
-        });
-        if (error) {
-          alert(`Payment Confirmation Error ${error.message}`);
-        } else if (paymentIntent) {
-          alert("Payment Successful");
-          console.log("Payment Successful ", paymentIntent);
-        }
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   return (
-    <StripeProvider publishableKey="pk_test_51K5Xv8FTDfvNWTlBDZOFUUpz7yp8KldtNXsUc1oVV8TJxQv0aEYeiPfz1o09GXBGkXluJUU2nrzk6HaMvcF0Q7X400e2aoMFXu">
-      <View style={{ padding: 20, flex: 1, backgroundColor: "#d3d3cb" }}>
-        <View style={{ justifyContent: "center", flexGrow: 1 }}>
+    <StripeProvider publishableKey={pk}>
+      <SafeAreaView style={{ backgroundColor: "#d3d3cb", flex: 1 }}>
+        <View style={{ justifyContent: "center", flexGrow: 1, margin: 20 }}>
           <Image
             style={{ width: 350, height: 100, resizeMode: "center" }}
             source={require("../../assets/visamastercardamex.png")}
@@ -92,12 +52,24 @@ const CardPaymentScreen = (props) => {
         </View>
         <TouchableOpacity
           style={styles.payButton}
-          onPress={handlePayPress}
+          onPress={() => {
+            payOrder(
+              cardDetails,
+              email,
+              confirmPayment,
+              cart,
+              seatNo,
+              payment,
+              message,
+              total,
+              navigation
+            );
+          }}
           disabled={loading}
         >
-          <Text style={{ fontSize: 16 }}>Pay RM 36.00</Text>
+          <Text style={{ fontSize: 16 }}>Pay RM{total}</Text>
         </TouchableOpacity>
-      </View>
+      </SafeAreaView>
     </StripeProvider>
   );
 };

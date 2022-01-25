@@ -8,8 +8,8 @@ import { useFirebase } from "../../firebase/FirebaseContext";
 const CheckOutScreen = ({ route, navigation }) => {
   const { cart, total } = route.params;
   const [message, setMessage] = useState("");
-  const [payment, setPayment] = useState("");
-  const { seatNoID } = useFirebase();
+  const [payment, setPayment] = useState(null);
+  const { addOrder, seatNoID } = useFirebase();
 
   return (
     <SafeAreaView style={{ backgroundColor: "#d3d3cb", flex: 1 }}>
@@ -17,7 +17,7 @@ const CheckOutScreen = ({ route, navigation }) => {
         style={{
           fontWeight: "bold",
           fontSize: 20,
-          padding: 15,
+          padding: 20,
           paddingBottom: 0,
         }}
       >
@@ -38,7 +38,7 @@ const CheckOutScreen = ({ route, navigation }) => {
               );
             })
           : null}
-        <View style={{ margin: 15 }}>
+        <View style={{ margin: 20 }}>
           <View style={{ flexDirection: "row", marginBottom: 15 }}>
             <Text style={{ flex: 1 }}>Message:</Text>
 
@@ -51,7 +51,7 @@ const CheckOutScreen = ({ route, navigation }) => {
           </View>
 
           <View style={{ flexDirection: "row" }}>
-            <Text style={{ flex: 1 }}>Payment Option:</Text>
+            <Text style={{ flex: 1 }}>Payment Method</Text>
 
             <RNPickerSelect
               placeholder={{
@@ -61,15 +61,40 @@ const CheckOutScreen = ({ route, navigation }) => {
               style={{ placeholder: { color: "grey" } }}
               onValueChange={(itemValue) => setPayment(itemValue)}
               items={[
-                { label: "Credit / Debit Card", value: "CDC" },
-                { label: "Pay by Cash", value: "PbC" },
+                { label: "Credit / Debit Card", value: "Credit / Debit Card" },
+                { label: "Pay by Cash", value: "Pay by Cash" },
               ]}
             />
           </View>
         </View>
       </ScrollView>
 
-      <TotalAmount totalPrice={total} text="Place Order" />
+      <TotalAmount
+        totalPrice={total}
+        text="Place Order"
+        onPress={() => {
+          if (payment == "Credit / Debit Card") {
+            navigation.navigate("CardPaymentScreen", {
+              cart: cart,
+              seatNo: seatNoID,
+              payment: payment,
+              message: message,
+              total: total,
+            });
+          } else if (payment == "Pay by Cash") {
+            addOrder(cart, seatNoID, payment, message, total);
+            navigation.navigate("PaymentSuccessScreen", {
+              cart: cart,
+              seatNo: seatNoID,
+              payment: payment,
+              message: message,
+              total: total,
+            });
+          } else {
+            alert("Please select an payment method");
+          }
+        }}
+      />
     </SafeAreaView>
   );
 };

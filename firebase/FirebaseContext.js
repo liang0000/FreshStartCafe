@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
+import { Alert } from "react-native";
 import {
   collection,
   doc,
@@ -10,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import uuid from "react-native-uuid";
-import { db, storage } from "../config";
+import { db, storage, firebase } from "../config";
 
 const FirebaseContext = createContext({});
 
@@ -19,9 +20,13 @@ export const useFirebase = () => {
 };
 
 export const FirebaseProvider = ({ children }) => {
+  //ADD localhost address of your server
+  const API_URL = "http://localhost:3000";
+
   const [menu, setMenu] = useState([]);
   const [seatNoID, setSeatNoID] = useState(null);
   const [cart, setCart] = useState([]);
+  const [order, setOrder] = useState([]);
 
   // Upload menu's image to Storage and Firestore
   const uploadMenu = async (
@@ -226,7 +231,7 @@ export const FirebaseProvider = ({ children }) => {
   const minusCart = (prod) => {
     let dummyCart = cart;
 
-    //Remove the product if quantity is 0
+    //Remove the product in cart if quantity is 0
     if (prod.productQuan === 1) {
       dummyCart = dummyCart.filter((product) => {
         return product.id !== prod.id;
@@ -243,32 +248,133 @@ export const FirebaseProvider = ({ children }) => {
     setCart(dummyCart);
   };
 
-  //Read Carts
-  const getCart = async () => {
-    let carts = [];
-    const querySnapshot = await getDocs(collection(db, "carts"));
-    querySnapshot.forEach((cart) => {
-      const cartData = cart.data();
-      cartData.id = cart.id;
-      carts.push(cartData);
-    });
-    setCart(carts);
+  //----------------------Order-----------------------------
+  //Add Order
+  const addOrder = async (cart, seatNo, payment, message, total) => {
+    // const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+
+    await addDoc(collection(db, "orders"), {
+      cart,
+      seatNo,
+      payment,
+      message,
+      total,
+      // orderTime: timestamp,
+    })
+      .then((docRef) => {
+        const order = {
+          id: docRef.id,
+          cart: cart,
+          seatNo: seatNo,
+          payment: payment,
+          message: message,
+          total: total,
+          // orderTime: timestamp,
+        };
+        setOrder((prevState) => [...prevState, order]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
+
+  //----------------------Server-----------------------------
+  //Connect Network
+  const fetchPaymentIntentClientSecret = async () => {
+    const response = await fetch(`${API_URL}/create-payment-intent`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const { clientSecret, error } = await response.json();
+    return { clientSecret, error };
+  };
+
+  //Pay with Card and Add Order
+  const payOrder = async (
+    cardDetails,
+    email,
+    confirmPayment,
+    cart,
+    seatNo,
+    payment,
+    message,
+    total,
+    navigation
+  ) => {
+    if (!cardDetails?.complete || !email) {
+      alert("Please enter Complete card details and Email");
+      return;
+    }
+    //Fetch the intent client secret from the backend
+    try {
+      const { clientSecret, error } = await fetchPaymentIntentClientSecret();
+      //confirm the payment
+      if (error) {
+        console.log("Unable to process payment");
+      } else {
+        const { paymentIntent, error } = await confirmPayment(clientSecret, {
+          type: "Card",
+          billingDetails: {
+            email: email,
+          },
+        });
+        if (error) {
+          alert(`Payment Confirmation Error ${error.message}`);
+        } else if (paymentIntent) {
+          addOrder(cart, seatNo, payment, message, total);
+          Alert.alert("Alert", "Payment Successful", [
+            {
+              text: "OK",
+              onPress: () => {
+                navigation.navigate("PaymentSuccessScreen", {
+                  cart: cart,
+                  seatNo: seatNo,
+                  payment: payment,
+                  message: message,
+                  total: total,
+                });
+              },
+            },
+          ]);
+          // console.log("Payment Successful ", paymentIntent);
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  //Read Carts
+  // const getCart = async () => {
+  //   let carts = [];
+  //   const querySnapshot = await getDocs(collection(db, "carts"));
+  //   querySnapshot.forEach((cart) => {
+  //     const cartData = cart.data();
+  //     cartData.id = cart.id;
+  //     carts.push(cartData);
+  //   });
+  //   setCart(carts);
+  // };
 
   //allows those function to be called later in other pages
   const value = {
     menu,
     seatNoID,
     cart,
+    order,
     setSeatNoID,
     uploadMenu,
     getMenu,
     deleteProduct,
     updateProduct,
     addCart,
-    getCart,
     plusCart,
     minusCart,
+    addOrder,
+    setCart,
+    payOrder,
   };
 
   return (

@@ -258,6 +258,7 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: "white",
     borderRadius: 5,
+    margin: 20,
   },
 
   cardInput: {
