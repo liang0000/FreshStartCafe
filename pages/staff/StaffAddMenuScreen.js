@@ -16,7 +16,7 @@ const StaffAddMenuScreen = () => {
   //constances
   const [image, setImage] = useState(null);
   const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState("");
+  const [productPrice, setProductPrice] = useState(0);
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("");
 

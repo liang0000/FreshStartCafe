@@ -1,39 +1,55 @@
-import React from "react";
-import { FlatList, SafeAreaView } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Image, SafeAreaView, ScrollView, Text } from "react-native";
 import OrderList from "../../components/OrderList";
 import TotalAmount from "../../components/TotalAmount";
+import { useFirebase } from "../../firebase/FirebaseContext";
 
-const OrdersSample = [
-  {
-    rank: 1,
-    picURL:
-      "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1421735953l/24356384.jpg",
-    name: "Chicken Curry",
-    price: 21.0,
-  },
-  {
-    rank: 2,
-    picURL: "https://images-na.ssl-images-amazon.com/images/I/81Pcob+ofmL.jpg",
-    name: "Beef Curry",
-    price: 20.0,
-  },
-];
+const OrderScreen = ({ navigation }) => {
+  const { cart, getCart, seatNoID, plusCart, minusCart } = useFirebase();
+  const [isRender, setIsRender] = useState(false);
+  let total = 0;
 
-const OrderScreen = () => {
-  const renderItem = ({ item }) => {
-    return (
-      <OrderList picURL={item.picURL} name={item.name} price={item.price} />
-    );
-  };
+  useEffect(() => {
+    console.log("Cart update, rerendering");
+  }, [cart]);
 
   return (
     <SafeAreaView style={{ backgroundColor: "#d3d3cb", flex: 1 }}>
-      <FlatList
-        data={OrdersSample}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => item.name + index}
+      <ScrollView>
+        {cart.length !== 0
+          ? cart.map((cart, i) => {
+              total = total + cart.productPrice * cart.productQuan;
+              return (
+                <OrderList
+                  key={i}
+                  picURL={cart.productImage}
+                  name={cart.productName}
+                  price={cart.productPrice}
+                  quantity={cart.productQuan}
+                  onMinus={() => {
+                    minusCart(cart);
+                    setIsRender(isRender ? false : true);
+                  }}
+                  onPlus={() => {
+                    plusCart(cart);
+                    setIsRender(isRender ? false : true);
+                  }}
+                />
+              );
+            })
+          : null}
+      </ScrollView>
+
+      <TotalAmount
+        totalPrice={total}
+        text="Check Out"
+        onPress={() =>
+          navigation.navigate("CheckOutScreen", {
+            cart: cart,
+            total: total,
+          })
+        }
       />
-      <TotalAmount totalPrice="55" text="Check Out" />
     </SafeAreaView>
   );
 };

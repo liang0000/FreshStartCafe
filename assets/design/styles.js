@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 12,
     alignSelf: "center",
+    textAlign: "center",
   },
 
   p: {
@@ -219,6 +220,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     flexDirection: "column",
     alignSelf: "center",
+    marginLeft: 10,
   },
 
   orderButton: {
@@ -249,27 +251,6 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     paddingLeft: 10,
     paddingRight: 10,
-  },
-
-  finalOrderPic: {
-    flex: 1,
-    height: "auto",
-    width: "auto",
-    resizeMode: "contain",
-  },
-
-  finalOrder: {
-    flexDirection: "row",
-    backgroundColor: "#FFFFFF",
-    padding: 10,
-    margin: 3,
-    height: 70,
-  },
-
-  finalOrderInfo: {
-    flex: 3,
-    flexDirection: "column",
-    alignSelf: "center",
   },
 
   payButton: {

@@ -9,8 +9,6 @@ const Tab = createBottomTabNavigator();
 
 //user bottom tab
 const tabNav = () => {
-  useEffect(() => {});
-
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({

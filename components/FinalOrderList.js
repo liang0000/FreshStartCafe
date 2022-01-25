@@ -6,9 +6,14 @@ const FinalOrderList = (props) => {
   const { picURL, name, price, quantity } = props;
 
   return (
-    <View style={styles.finalOrder}>
-      <Image style={styles.finalOrderPic} source={picURL}></Image>
-      <View style={styles.finalOrderInfo}>
+    <View style={styles.order}>
+      <Image
+        style={styles.orderPic}
+        source={{
+          uri: picURL,
+        }}
+      />
+      <View style={styles.orderInfo}>
         <Text>{name}</Text>
         <Text>RM {price}</Text>
       </View>

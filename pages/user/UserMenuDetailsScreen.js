@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -15,10 +15,6 @@ const UserMenuDetailsScreen = ({ route, navigation }) => {
   const [counter, setCounter] = useState(1);
   const { product } = route.params;
   const { seatNoID, addCart } = useFirebase();
-
-  useEffect(() => {
-    console.log("seattt" + seatNoID);
-  }, []);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -37,7 +33,13 @@ const UserMenuDetailsScreen = ({ route, navigation }) => {
         <View style={styles.counterGroup}>
           <Text style={styles.detailText}>RM {product.productPrice}</Text>
           <View style={styles.counterStyle}>
-            <TouchableOpacity onPress={() => setCounter(counter - 1)}>
+            <TouchableOpacity
+              onPress={() => {
+                if (counter >= 1) {
+                  setCounter(counter - 1);
+                }
+              }}
+            >
               <Icon name="minus-circle" type="font-awesome-5" size={18} />
             </TouchableOpacity>
             <Text style={{ paddingHorizontal: 12 }}>{counter}</Text>
@@ -52,17 +54,7 @@ const UserMenuDetailsScreen = ({ route, navigation }) => {
       <TouchableOpacity style={styles.uploadStyle}>
         <Text
           style={styles.uploadBtn}
-          onPress={() =>
-            // addCart(
-            //   product.productImage,
-            //   product.productName,
-            //   product.productPrice,
-            //   counter,
-            //   product.id,
-            //   seatNoID
-            // )
-            alert(product.id + seatNoID)
-          }
+          onPress={() => addCart(product, counter)}
         >
           add to cart
         </Text>

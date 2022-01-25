@@ -16,7 +16,7 @@ import { sqrt } from "react-native-reanimated";
 const StaffUpdateMenuScreen = ({ route }) => {
   const [image, setImage] = useState(null);
   const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState("");
+  const [productPrice, setProductPrice] = useState(0);
   const [productDescription, setProductDescription] = useState("");
   const [productCategory, setProductCategory] = useState("");
 
@@ -51,7 +51,7 @@ const StaffUpdateMenuScreen = ({ route }) => {
     if (product.productCategory !== "") {
       setProductCategory(product.productCategory);
     }
-    if (product.productPrice !== "") {
+    if (product.productPrice !== 0) {
       setProductPrice(product.productPrice);
     }
     if (product.productDescription !== "") {

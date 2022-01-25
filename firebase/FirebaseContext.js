@@ -35,7 +35,7 @@ export const FirebaseProvider = ({ children }) => {
       image !== "" &&
       productName !== "" &&
       productCategory !== "" &&
-      productPrice !== "" &&
+      productPrice !== 0 &&
       productDescription
     ) {
       // const storageDb = getStorage();
@@ -162,42 +162,85 @@ export const FirebaseProvider = ({ children }) => {
 
   //----------------------Cart-----------------------------
   //Add to Cart
-  const addCart = async (
-    productImage,
-    productName,
-    productPrice,
-    productQuan,
-    productID,
-    seatNo
-  ) => {
-    if (productQuan !== 0) {
-      await addDoc(collection(db, "carts"), {
-        productImage,
-        productName,
-        productPrice,
-        productQuan,
-        productID,
-        seatNo,
-      })
-        .then((docRef) => {
-          const product = {
-            id: docRef.id,
-            productImage: productImage,
-            productName: productName,
-            productPrice: productPrice,
-            productQuan: productQuan,
-            seatNo: seatNo,
-          };
-          setCart((prevState) => [...prevState, product]);
-          console.log("Successfully added to cart");
-          alert({ productName } + " added to cart");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+  // const addCart = async (
+  //   productImage,
+  //   productName,
+  //   productPrice,
+  //   productQuan,
+  //   productID,
+  //   seatNo
+  // ) => {
+  //   if (productQuan > 0) {
+  //     await addDoc(collection(db, "carts"), {
+  //       productImage,
+  //       productName,
+  //       productPrice,
+  //       productQuan,
+  //       productID,
+  //       seatNo,
+  //     })
+  //       .then((docRef) => {
+  //         const cart = {
+  //           id: docRef.id,
+  //           productImage: productImage,
+  //           productName: productName,
+  //           productPrice: productPrice,
+  //           productQuan: productQuan,
+  //           seatNo: seatNo,
+  //         };
+  //         setCart((prevState) => [...prevState, cart]);
+  //         console.log("Successfully added to cart");
+  //         alert({ productName } + " added to cart");
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //       });
+  //   } else {
+  //     alert("Please add at least 1 food or drink");
+  //   }
+  // };
+
+  //Add to Cart
+  const addCart = (product, productQuan) => {
+    product.productQuan = productQuan;
+    if (productQuan > 0) {
+      alert(product.productName + " added to cart.");
+      setCart((prevState) => [...prevState, product]);
     } else {
-      alert("Quantity of food or drink cannot be 0");
+      alert("Please add at least 1 food or drink");
     }
+  };
+
+  //Plus quanlity of product in cart
+  const plusCart = (prod) => {
+    let dummyCart = cart;
+    dummyCart.forEach((product) => {
+      if (product.id === prod.id) {
+        product.productQuan = product.productQuan + 1;
+      }
+    });
+    setCart(dummyCart);
+  };
+
+  //Minus quanlity of product in cart
+  const minusCart = (prod) => {
+    let dummyCart = cart;
+
+    //Remove the product if quantity is 0
+    if (prod.productQuan === 1) {
+      dummyCart = dummyCart.filter((product) => {
+        return product.id !== prod.id;
+      });
+      setCart(dummyCart);
+      return;
+    }
+
+    dummyCart.forEach((product) => {
+      if (product.id === prod.id) {
+        product.productQuan = product.productQuan - 1;
+      }
+    });
+    setCart(dummyCart);
   };
 
   //Read Carts
@@ -216,14 +259,16 @@ export const FirebaseProvider = ({ children }) => {
   const value = {
     menu,
     seatNoID,
+    cart,
     setSeatNoID,
     uploadMenu,
     getMenu,
     deleteProduct,
     updateProduct,
-    cart,
     addCart,
     getCart,
+    plusCart,
+    minusCart,
   };
 
   return (
