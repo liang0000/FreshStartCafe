@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import uuid from "react-native-uuid";
-import { db, storage, firebase } from "../config";
+import { db, storage } from "../config";
 
 const FirebaseContext = createContext({});
 

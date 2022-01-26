@@ -23,5 +23,5 @@ if (!firebase.apps.length) {
 const db = getFirestore();
 const storage = firebase.storage();
 
-export { db, storage, firebase };
+export { db, storage };
 export default firebaseConfig;
