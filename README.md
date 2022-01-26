@@ -12,7 +12,7 @@ Above codes will download "node_modules" in this project and inside "server" fol
 and have the network connect to server to have Stripe Payment API working.
 
 During CardPaymentScreen, you can use these dummy card below to try out different card types like Visa, Mastercard and Amex
-The date and CVC can simply input whatever you want.The link is provided for further testing.
+The date and CVC can simply input whatever you want. The link is provided for further testing.
 
 4242 4242 4242 4242 (visa)
 4000 0025 0000 3155 (authentication)
