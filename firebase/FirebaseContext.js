@@ -167,45 +167,6 @@ export const FirebaseProvider = ({ children }) => {
 
   //----------------------Cart-----------------------------
   //Add to Cart
-  // const addCart = async (
-  //   productImage,
-  //   productName,
-  //   productPrice,
-  //   productQuan,
-  //   productID,
-  //   seatNo
-  // ) => {
-  //   if (productQuan > 0) {
-  //     await addDoc(collection(db, "carts"), {
-  //       productImage,
-  //       productName,
-  //       productPrice,
-  //       productQuan,
-  //       productID,
-  //       seatNo,
-  //     })
-  //       .then((docRef) => {
-  //         const cart = {
-  //           id: docRef.id,
-  //           productImage: productImage,
-  //           productName: productName,
-  //           productPrice: productPrice,
-  //           productQuan: productQuan,
-  //           seatNo: seatNo,
-  //         };
-  //         setCart((prevState) => [...prevState, cart]);
-  //         console.log("Successfully added to cart");
-  //         alert({ productName } + " added to cart");
-  //       })
-  //       .catch((error) => {
-  //         console.error(error);
-  //       });
-  //   } else {
-  //     alert("Please add at least 1 food or drink");
-  //   }
-  // };
-
-  //Add to Cart
   const addCart = (product, productQuan) => {
     product.productQuan = productQuan;
     if (productQuan > 0) {
@@ -249,9 +210,29 @@ export const FirebaseProvider = ({ children }) => {
   };
 
   //----------------------Order-----------------------------
+  //Read Order
+  const getOrder = async () => {
+    let orders = [];
+    const querySnapshot = await getDocs(collection(db, "orders"));
+    querySnapshot.forEach((order) => {
+      const orderData = order.data();
+      orderData.id = order.id;
+      orders.push(orderData);
+    });
+    setOrder(orders);
+  };
+
   //Add Order
   const addOrder = async (cart, seatNo, payment, message, total) => {
-    // const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+    const timeStamp = () => {
+      var date = new Date().getDate();
+      var month = new Date().getMonth() + 1;
+      var year = new Date().getFullYear();
+      var hour = new Date().getHours();
+      var minute = new Date().getMinutes();
+
+      return `${date}-${month}-${year} ${hour}:${minute}`;
+    };
 
     await addDoc(collection(db, "orders"), {
       cart,
@@ -259,7 +240,7 @@ export const FirebaseProvider = ({ children }) => {
       payment,
       message,
       total,
-      // orderTime: timestamp,
+      orderTime: timeStamp(),
     })
       .then((docRef) => {
         const order = {
@@ -269,7 +250,7 @@ export const FirebaseProvider = ({ children }) => {
           payment: payment,
           message: message,
           total: total,
-          // orderTime: timestamp,
+          orderTime: timeStamp(),
         };
         setOrder((prevState) => [...prevState, order]);
       })
@@ -346,18 +327,6 @@ export const FirebaseProvider = ({ children }) => {
     }
   };
 
-  //Read Carts
-  // const getCart = async () => {
-  //   let carts = [];
-  //   const querySnapshot = await getDocs(collection(db, "carts"));
-  //   querySnapshot.forEach((cart) => {
-  //     const cartData = cart.data();
-  //     cartData.id = cart.id;
-  //     carts.push(cartData);
-  //   });
-  //   setCart(carts);
-  // };
-
   //allows those function to be called later in other pages
   const value = {
     menu,
@@ -375,6 +344,7 @@ export const FirebaseProvider = ({ children }) => {
     addOrder,
     setCart,
     payOrder,
+    getOrder,
   };
 
   return (

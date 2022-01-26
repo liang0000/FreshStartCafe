@@ -11,10 +11,10 @@ import { Icon } from "react-native-elements";
 import styles from "../../assets/design/styles";
 import { useFirebase } from "../../firebase/FirebaseContext";
 
-const UserMenuDetailsScreen = ({ route, navigation }) => {
+const UserMenuDetailsScreen = ({ route }) => {
   const [counter, setCounter] = useState(1);
   const { product } = route.params;
-  const { seatNoID, addCart } = useFirebase();
+  const { addCart } = useFirebase();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

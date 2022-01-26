@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   history: {
     flexDirection: "row",
     backgroundColor: "#FFFFFF",
-    padding: 10,
+    padding: 20,
     margin: 3,
     height: 70,
   },

@@ -1,36 +1,39 @@
-import React from "react";
-import { FlatList, SafeAreaView } from "react-native";
+import React, { useEffect } from "react";
+import { SafeAreaView, ScrollView, TouchableOpacity } from "react-native";
 import HistoryList from "../../components/HistoryList";
+import { useFirebase } from "../../firebase/FirebaseContext";
 
-const HistorySample = [
-  {
-    rank: 1,
-    table: 5,
-    price: 21,
-    date: "23-11-2021 16:04",
-  },
-  {
-    rank: 2,
-    table: 6,
-    price: 34,
-    date: "21-11-2021 21:24",
-  },
-];
+const HistoryScreen = ({ navigation }) => {
+  const { order, getOrder } = useFirebase();
 
-const HistoryScreen = () => {
-  const renderItem = ({ item }) => {
-    return (
-      <HistoryList table={item.table} price={item.price} date={item.date} />
-    );
-  };
+  useEffect(() => {
+    getOrder();
+  }, []);
 
   return (
     <SafeAreaView style={{ backgroundColor: "#d3d3cb", flex: 1 }}>
-      <FlatList
-        data={HistorySample}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => item.date + index}
-      />
+      <ScrollView>
+        {order.length !== 0
+          ? order.map((order, i) => {
+              return (
+                <TouchableOpacity
+                  key={i}
+                  onPress={() =>
+                    navigation.navigate("HistoryDetailsScreen", {
+                      order: order,
+                    })
+                  }
+                >
+                  <HistoryList
+                    seatNo={order.seatNo}
+                    total={order.total}
+                    date={order.orderTime}
+                  />
+                </TouchableOpacity>
+              );
+            })
+          : null}
+      </ScrollView>
     </SafeAreaView>
   );
 };

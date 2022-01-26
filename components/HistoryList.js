@@ -3,12 +3,14 @@ import { Text, View } from "react-native";
 import styles from "../assets/design/styles";
 
 const HistoryList = (props) => {
+  const { seatNo, total, date } = props;
+
   return (
     <View style={styles.history}>
-      <Text style={styles.historyTableNum}>Table {props.table}</Text>
+      <Text style={styles.historyTableNum}>Table {seatNo}</Text>
       <View style={styles.historyInfo}>
-        <Text>RM {props.price}</Text>
-        <Text>{props.date}</Text>
+        <Text>RM{total}</Text>
+        <Text>{date}</Text>
       </View>
     </View>
   );

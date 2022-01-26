@@ -14,6 +14,15 @@ import { useFirebase } from "../../firebase/FirebaseContext";
 const PaymentSuccessScreen = ({ route, navigation }) => {
   const { cart, seatNo, payment, message, total } = route.params;
   const { setCart } = useFirebase();
+  const timeStamp = () => {
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+    var hour = new Date().getHours();
+    var minute = new Date().getMinutes();
+
+    return `${date}-${month}-${year} ${hour}:${minute}`;
+  };
 
   return (
     <SafeAreaView style={{ backgroundColor: "#d3d3cb", flex: 1 }}>
@@ -43,7 +52,7 @@ const PaymentSuccessScreen = ({ route, navigation }) => {
           <FinalDetails label="Total Price" text={"RM" + total} />
           <FinalDetails label="Message" text={message} />
           <FinalDetails label="Payment Method" text={payment} />
-          <FinalDetails label="Order Time" text="NOW" />
+          <FinalDetails label="Order Time" text={timeStamp()} />
         </View>
       </ScrollView>
       <TouchableOpacity
