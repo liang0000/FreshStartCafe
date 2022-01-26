@@ -1,5 +1,7 @@
 FreshStart Cafe App is done by Teng Heng Liang and Twinke
+
 React Native with Firebase (Firestore and Storage)
+
 Stripe Payment API included
 
 Before running this project, please run the codes below accordingly in the terminal
