@@ -96,7 +96,7 @@ const StaffUpdateMenuScreen = ({ route }) => {
           <TextInput
             style={styles.inputText}
             placeholder="Price"
-            value={productPrice}
+            value={productPrice.toString()}
             onChangeText={(text) => setProductPrice(text)}
           />
           <TextInput
