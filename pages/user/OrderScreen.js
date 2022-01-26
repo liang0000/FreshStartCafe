@@ -5,7 +5,7 @@ import TotalAmount from "../../components/TotalAmount";
 import { useFirebase } from "../../firebase/FirebaseContext";
 
 const OrderScreen = ({ navigation }) => {
-  const { cart, getCart, seatNoID, plusCart, minusCart } = useFirebase();
+  const { cart, plusCart, minusCart } = useFirebase();
   const [isRender, setIsRender] = useState(false);
   let total = 0;
 
