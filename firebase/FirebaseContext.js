@@ -37,11 +37,11 @@ export const FirebaseProvider = ({ children }) => {
     productDescription
   ) => {
     if (
-      image !== "" &&
+      image !== null &&
       productName !== "" &&
       productCategory !== "" &&
       productPrice !== 0 &&
-      productDescription
+      productDescription !== ""
     ) {
       // const storageDb = getStorage();
       let randomId = uuid.v4();

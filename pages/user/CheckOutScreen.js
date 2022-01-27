@@ -54,6 +54,8 @@ const CheckOutScreen = ({ route, navigation }) => {
             <Text style={{ flex: 1 }}>Payment Method</Text>
 
             <RNPickerSelect
+              useNativeAndroidPickerStyle={false}
+              fixAndroidTouchableBug={true}
               placeholder={{
                 label: "Select an payment",
                 value: null,

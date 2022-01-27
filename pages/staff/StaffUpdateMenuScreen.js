@@ -11,7 +11,6 @@ import {
 import styles from "../../assets/design/styles";
 import * as ImagePicker from "expo-image-picker";
 import { useFirebase } from "../../firebase/FirebaseContext";
-import { sqrt } from "react-native-reanimated";
 
 const StaffUpdateMenuScreen = ({ route }) => {
   const [image, setImage] = useState(null);
