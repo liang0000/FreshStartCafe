@@ -59,7 +59,7 @@ const PaymentSuccessScreen = ({ route, navigation }) => {
         style={styles.payButton}
         onPress={() => navigation.popToTop(setCart([]))}
       >
-        <Text style={{ fontSize: 16 }}>Back to Menu</Text>
+        <Text style={{ fontSize: 16 }}>Back to Order</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
