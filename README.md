@@ -17,7 +17,7 @@ Above codes will download "node_modules" in the project and inside "server" fold
 - https://stripe.com/docs/testing
 
 ### User Manual
-<img src="https://user-images.githubusercontent.com/54095039/155338967-d4140f94-f25a-4d4a-b3a2-d276b25e5ec1.jpg" width="240"> <img src="https://user-images.githubusercontent.com/54095039/155339136-08214d2c-cacc-48ec-91b9-63c0be84b11f.jpg" width="240"> <img src="https://user-images.githubusercontent.com/54095039/155339632-bfa168f3-2ac7-4836-963f-e3901b4e0f39.jpg" width="240">
+<img src="https://user-images.githubusercontent.com/54095039/155338967-d4140f94-f25a-4d4a-b3a2-d276b25e5ec1.jpg" width="250"> <img src="https://user-images.githubusercontent.com/54095039/155339136-08214d2c-cacc-48ec-91b9-63c0be84b11f.jpg" width="250"> <img src="https://user-images.githubusercontent.com/54095039/155339632-bfa168f3-2ac7-4836-963f-e3901b4e0f39.jpg" width="250">
 
 <img src="https://user-images.githubusercontent.com/54095039/155339675-65b5574b-f4ca-4638-a9f4-bdeed8b070b4.jpg" width="240"> <img src="https://user-images.githubusercontent.com/54095039/155339651-c2d412c9-6117-435d-8ba6-5aaf41239634.jpg" width="240"> <img src="https://user-images.githubusercontent.com/54095039/155339684-3fd4e8ed-8093-4497-a593-a44a3f712888.jpg" width="240">
 
