@@ -29,3 +29,5 @@ The date and CVC can simply input whatever you want. The link is provided for fu
 4000 0025 0000 3155 (authentication)
 
 https://stripe.com/docs/testing
+
+![IMG_9664](https://user-images.githubusercontent.com/54095039/155331015-6984d3e4-6207-46c7-b25d-76ca1abbe3a6.JPG)
