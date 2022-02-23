@@ -1,4 +1,5 @@
 ## FreshStart Cafe App by Teng Heng Liang and Twinke
+- Slot Booking App
 - React Native with Firebase (Firestore and Storage)
 - Stripe Payment API included
 
